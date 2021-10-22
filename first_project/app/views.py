@@ -29,5 +29,5 @@ def workdir_view(request):
     files_list = os.listdir(settings.BASE_DIR)
     msg = f'Список файлов в {settings.BASE_DIR}:<br>'
     for file in files_list:
-        msg += '&nbsp' * 4 + file + '<br>'
+        msg += file + '<br>'
     return HttpResponse(msg)
