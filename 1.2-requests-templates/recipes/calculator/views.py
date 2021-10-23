@@ -16,15 +16,30 @@ DATA = {
         'сыр, ломтик': 1,
         'помидор, ломтик': 1,
     },
-    # можете добавить свои рецепты ;)
+    'samogon': {
+        'томатная паста, л': 1,
+        'сахар, кг': 5,
+        'вода, л': 15,
+        'пиво, л': 0.25,
+    },
 }
 
-# Напишите ваш обработчик. Используйте DATA как источник данных
-# Результат - render(request, 'calculator/index.html', context)
-# В качестве контекста должен быть передан словарь с рецептом:
-# context = {
-#   'recipe': {
-#     'ингредиент1': количество1,
-#     'ингредиент2': количество2,
-#   }
-# }
+
+def show_recipe(request, recipe):
+    template_name = 'calculator/index.html'
+
+    ingredients = DATA.get(recipe)
+    servings = request.GET.get('servings')
+
+    if ingredients != None and servings != None and servings.isdigit() == True:
+        servings = int(servings)
+        if  servings > 1:
+            ingredients = ingredients.copy()
+            for name, number in ingredients.items():
+                ingredients[name] = number * servings
+
+    context = {
+        'recipe': ingredients,
+    }
+
+    return render(request, template_name, context)
