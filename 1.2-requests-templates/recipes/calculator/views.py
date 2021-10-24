@@ -16,12 +16,6 @@ DATA = {
         'сыр, ломтик': 1,
         'помидор, ломтик': 1,
     },
-    'samogon': {
-        'томатная паста, л': 1,
-        'сахар, кг': 5,
-        'вода, л': 15,
-        'пиво, л': 0.25,
-    },
 }
 
 
@@ -29,9 +23,9 @@ def show_recipe(request, recipe):
     template_name = 'calculator/index.html'
 
     ingredients = DATA.get(recipe)
-    servings = request.GET.get('servings')
+    servings = request.GET.get('servings', default='1')
 
-    if ingredients != None and servings != None and servings.isdigit() == True:
+    if ingredients != None and servings.isdigit() == True:
         servings = int(servings)
         if  servings > 1:
             ingredients = ingredients.copy()
