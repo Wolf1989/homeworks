@@ -24,8 +24,8 @@ def bus_stations(request):
             db_stations.append(station)
 
     paginator = Paginator(db_stations, 10)
-    page = request.GET.get('page')
-    page = paginator.get_page(page)
+    current_page = request.GET.get('page')
+    page = paginator.get_page(current_page)
     bus_stations = page.object_list
 
     context = {
