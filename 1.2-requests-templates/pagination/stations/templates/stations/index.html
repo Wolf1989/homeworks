@@ -42,12 +42,19 @@
         </table>
 
         {% if page.has_previous %}
+            {% comment %} Ссылка на предыдущую страницу {% endcomment %}
+            <a href="?page={{ previous_page }}">{{ previous_page }}</a>
             <a class="button button-primary" href="?page={{ page.previous_page_number }}">⟵</a>
         {% endif %}
         <a class="button disabled" href="">{{ page.number }}</a>
         {% if page.has_next %}
-            <a class="button button-primary" href="?page={{ page.next_page_number }}">⟶</a>
+           <a class="button button-primary" href="?page={{ page.next_page_number }}">⟶</a>
+           {% comment %} Ссылка на следующую страницу {% endcomment %}
+           <a href="?page={{ next_page }}">{{ next_page }}</a>
         {% endif %}
+
+
+
     </div>
 </div>
 </body>

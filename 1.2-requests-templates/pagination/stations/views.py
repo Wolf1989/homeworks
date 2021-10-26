@@ -12,6 +12,8 @@ def index(request):
 
 def bus_stations(request):
     db_stations = []
+    link_next_page = None
+    link_previous_page = None
 
     with open(settings.BUS_STATION_CSV, mode='r', encoding='utf-8') as data_file:
         stations_list = csv.DictReader(data_file)
@@ -28,8 +30,20 @@ def bus_stations(request):
     page = paginator.get_page(current_page)
     bus_stations = page.object_list
 
+    if page.has_next():
+        next_page = page.next_page_number()
+
+    if page.has_previous():
+        previous_page = page.previous_page_number()
+
+    list_pages = list(paginator.page_range)
+
     context = {
         'bus_stations': bus_stations,
         'page': page,
+        'next_page': next_page,
+        'previous_page': previous_page,
+        'list_pages': list_pages,
     }
+
     return render(request, 'stations/index.html', context)
