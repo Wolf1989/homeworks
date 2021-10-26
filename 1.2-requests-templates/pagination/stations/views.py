@@ -36,14 +36,11 @@ def bus_stations(request):
     if page.has_previous():
         previous_page = page.previous_page_number()
 
-    list_pages = list(paginator.page_range)
-
     context = {
         'bus_stations': bus_stations,
         'page': page,
         'next_page': next_page,
         'previous_page': previous_page,
-        'list_pages': list_pages,
     }
 
     return render(request, 'stations/index.html', context)
