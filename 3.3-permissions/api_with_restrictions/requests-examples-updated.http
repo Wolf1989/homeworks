@@ -108,8 +108,8 @@ Content-Type: application/json
 
 ###
 
-# попытка изменить объявление чужое объявление пользователем
-PATCH {{baseUrl}}/advertisements/12/
+# попытка изменить чужое объявление простым пользователем
+PATCH {{baseUrl}}/advertisements/1/
 Content-Type: application/json
 Authorization: Token {{ user1 }}
 
