@@ -22,7 +22,7 @@ class AdvertisementViewSet(ModelViewSet):
     ordering_fields = ['id', 'title']
 
     def get_queryset(self):
-        """Отображает """
+        """Добавляет чернове объявления пользовтеля"""
         queryset = super().get_queryset()
         if self.request.user.is_authenticated:
             # Объединяем стандартный queryset с queryset содержащий все черновые
@@ -52,7 +52,7 @@ class AdvertisementViewSet(ModelViewSet):
 
     @action(detail=False, methods=['get'], permission_classes=[IsAuthenticatedUser])
     def show_favorites(self, request):
-        """Получение списка избранных объявлений пользователя"""
+        """Получение списка избранных объявлений"""
         advs = request.user.featured_ads.all()
         page = self.paginate_queryset(advs)
         if page is not None:
@@ -60,4 +60,4 @@ class AdvertisementViewSet(ModelViewSet):
             return self.get_paginated_response(serializer.data)
         serializer = self.get_serializer(advs, many=True)
         return response.Response({"favorites_ads": serializer.data})
-        
+
