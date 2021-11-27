@@ -22,7 +22,11 @@ class AdvertisementViewSet(ModelViewSet):
     ordering_fields = ['id', 'title']
 
     def get_queryset(self):
-        """Добавляет чернове объявления пользовтеля"""
+        """
+        Добавляет черновые объявления пользовтеля к основному списку.
+        Каждый пользователь видит только свои черновики.
+
+        """
         queryset = super().get_queryset()
         if self.request.user.is_authenticated:
             # Объединяем стандартный queryset с queryset содержащий все черновые
