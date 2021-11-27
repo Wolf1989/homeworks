@@ -44,7 +44,11 @@ class AdvertisementViewSet(ModelViewSet):
 
     @action(detail=True, methods=['patch'], permission_classes=[IsAuthenticatedUser])
     def add_to_favourites(self, request, pk=None):
-        """Добавление объявления в список избранных"""
+        """
+        Добавление объявления в список избранных
+        для добавления .../<id>/add_to_favourites/
+
+        """
         obj = self.get_object()
         user = request.user
         if obj.creator != user:
