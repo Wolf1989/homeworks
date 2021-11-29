@@ -86,7 +86,7 @@ def test_get_course_by_name(api_client):
     )
 )
 @pytest.mark.django_db
-def test_with_specific_settings(api_client, settings, student_factory, count, status):
+def test_with_max_students_per_course(api_client, settings, student_factory, count, status):
     settings.MAX_STUDENTS_PER_COURSE = 2
     url = reverse("courses-list")
     students = student_factory(_quantity=count)
