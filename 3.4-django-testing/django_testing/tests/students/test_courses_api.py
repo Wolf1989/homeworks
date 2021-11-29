@@ -92,7 +92,7 @@ def test_with_max_students_per_course(api_client, settings, student_factory, cou
     students = student_factory(_quantity=count)
     data = {
         "name": "Test Course",
-        "students": [student.id for student in students]
+        "students": [x.id for x in students]
     }
     resp = api_client.post(url, data)
     assert resp.status_code == status
